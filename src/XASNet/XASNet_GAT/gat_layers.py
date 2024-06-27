@@ -5,7 +5,6 @@ from .dense_layers import LinearLayer, Residual_block
 
 from torch_geometric.nn import MessagePassing
 from torch_geometric.utils import softmax
-#import torch_scatter
 from torch_geometric.utils import scatter
 
 
@@ -78,7 +77,7 @@ class GATLayerCus(MessagePassing):
         return out
 
     def aggregate(self, inputs, index, dim_size=None):
-        out = torch_scatter.scatter(inputs, index, dim=self.node_dim, 
+        out = scatter(inputs, index, dim=self.node_dim, 
         dim_size=dim_size, reduce='sum')
 
         out = self.res_block(out)
@@ -154,7 +153,7 @@ class GATv2LayerCus(MessagePassing):
         return out
 
     def aggregate(self, inputs, index, dim_size=None):
-        out = torch_scatter.scatter(inputs, index, dim=self.node_dim, 
+        out = scatter(inputs, index, dim=self.node_dim, 
         dim_size=dim_size, reduce='sum')
 
         out = self.res_block(out)
