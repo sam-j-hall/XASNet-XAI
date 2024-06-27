@@ -15,7 +15,7 @@ def read(
         return f.read()
 
 setup(
-    name="XASNet-XAI",
+    name="XASNet",
     packages=find_packages("src"),
     package_dir={"": "src"},
     version="1.0.0",
