@@ -139,8 +139,8 @@ class GNNTrainer():
                 self.save_metrics()
                 
                 print(f"time = {time} mins")
-                print(f"epoch {epoch} | average train loss = {avg_train_loss:.2f}",
-                    f" and average validation loss = {avg_val_loss:.2f}",
+                print(f"epoch {epoch} | average train loss = {avg_train_loss:.5f}",
+                    f" and average validation loss = {avg_val_loss:.5f}",
                     f" |learning rate = {lr:.5f}")
 
 

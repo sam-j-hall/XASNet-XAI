@@ -12,8 +12,8 @@ class MetricManager():
             self.outputs[mode] = {}
             self.outputs[mode]['epoch'] = []
             self.outputs[mode]['time'] = []
-            self.outputs[mode]['loss'] = []
-            self.outputs[mode]['lr'] = []
+            self.outputs[mode]['{:.5f}'.format(loss)] = []
+            self.outputs[mode]['{:.4f}'.format(lr)] = []
 
     def store_metrics(
         self, 
