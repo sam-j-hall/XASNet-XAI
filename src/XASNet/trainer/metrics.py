@@ -12,8 +12,8 @@ class MetricManager():
             self.outputs[mode] = {}
             self.outputs[mode]['epoch'] = []
             self.outputs[mode]['time'] = []
-            self.outputs[mode]['{:.5f}'.format(loss)] = []
-            self.outputs[mode]['{:.4f}'.format(lr)] = []
+            self.outputs[mode]['loss'] = []
+            self.outputs[mode]['lr'] = []
 
     def store_metrics(
         self, 
@@ -26,8 +26,8 @@ class MetricManager():
 
        self.outputs[mode]['epoch'].append(epoch)
        self.outputs[mode]['time'].append(time)
-       self.outputs[mode]['loss'].append(loss) 
-       self.outputs[mode]['lr'].append(lr)
+       self.outputs[mode]['loss'].append('{:.5f}'.format(loss)) 
+       self.outputs[mode]['lr'].append('{:.4f}'.format(lr))
 
     def best_metric(self, mode: str = 'val'):
         best_results = {}
