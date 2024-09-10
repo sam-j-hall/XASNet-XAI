@@ -18,7 +18,8 @@ gnn_layers = {
     'gat': geomnn.GATConv,
     'gcn': geomnn.GCNConv,
     'gatv2': geomnn.GATv2Conv,
-    'graphConv': geomnn.GraphConv
+    'graphConv': geomnn.GraphConv,
+    'sage': geomnn.SAGEConv
     }
 
 class XASNet_GNN(torch.nn.Module):
@@ -101,6 +102,8 @@ class XASNet_GNN(torch.nn.Module):
                 layers = [m.lin_r, m.lin_l]
             elif isinstance(m, geomnn.GraphConv):
                 layers = [m.lin_rel, m.lin_root]
+            elif isinstance(m.geomnn.SAGEConv):
+                layers = [m.lin_l]
                 
             for layer in layers:
                 kaiming_orthogonal_init(layer.weight.data)
