@@ -127,14 +127,14 @@ class GNNTrainer():
                     mode='train',
                     epoch=epoch,
                     time=time,
-                    loss=round(float(avg_train_loss), 2),
+                    loss=round(float(avg_train_loss), 5),
                     lr=lr
                     )
                 self.metrics.store_metrics(
                     mode='val',
                     epoch=epoch,
                     time=time,
-                    loss=round(float(avg_val_loss), 2),
+                    loss=round(float(avg_val_loss), 5),
                     lr=lr
                     )
                 self.save_metrics(self.metric_path)
