@@ -141,8 +141,8 @@ class GNNTrainer():
                 
                 print(f"time = {time} mins")
                 print(f"epoch {epoch} | average train loss = {avg_train_loss:.5f}",
-                    f" and average validation loss = {avg_val_loss:.5f}",
-                    f" |learning rate = {lr:.5f}")
+                    f"and average validation loss = {avg_val_loss:.5f}",
+                    f"| learning rate = {lr:.5f}")
 
 
     def predict(
