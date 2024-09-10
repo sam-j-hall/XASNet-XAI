@@ -30,7 +30,7 @@ class GNNTrainer():
         """
         self.model = model
         self.model_name = model_name 
-        self._save_model_params()
+        self._save_model_params(metric_path)
 
         self.metrics = MetricManager()
         # load the previous metrics from last training
@@ -45,6 +45,7 @@ class GNNTrainer():
             pass
 
         self.device = device
+        self.metric_path = metric_path
 
     def train_val(
         self, 
@@ -136,7 +137,7 @@ class GNNTrainer():
                     loss=round(float(avg_val_loss), 2),
                     lr=lr
                     )
-                self.save_metrics()
+                self.save_metrics(self.metric_path)
                 
                 print(f"time = {time} mins")
                 print(f"epoch {epoch} | average train loss = {avg_train_loss:.5f}",
@@ -176,7 +177,7 @@ class GNNTrainer():
         ax.set_xlabel('Energies (eV)')
         ax.set_ylabel('Intensity (arb. units)')
 
-    def save_metrics(self, path: str = './metrics/'):
+    def save_metrics(self, path):
         if not osp.exists(path):
             os.mkdir(path)
         for mode in self.metrics.modes:
@@ -184,7 +185,7 @@ class GNNTrainer():
             df.to_csv(osp.join(path, f"{mode}_metrics.csv"), index=False)
         
 
-    def _save_model_params(self, path: str = './metrics/'):
+    def _save_model_params(self, path):
         if not osp.exists(path):
             os.mkdir(path)
 
