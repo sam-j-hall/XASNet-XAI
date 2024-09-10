@@ -43,6 +43,7 @@ class XASNet_GNN(torch.nn.Module):
         in_channels: List[int],
         out_channels: List[int],
         num_targets: int,
+        dropout: float,
         heads: Optional[int] = None,
         gat_dp: float = 0,
         ) -> None:
@@ -56,6 +57,7 @@ class XASNet_GNN(torch.nn.Module):
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.num_targets = num_targets
+        self.dp_rate = dropout
         self.num_layers = num_layers
         self.heads = heads
 
@@ -85,7 +87,7 @@ class XASNet_GNN(torch.nn.Module):
         
         self.interaction_layers = torch.nn.ModuleList(int_layers)
 
-        self.dropout = torch.nn.Dropout(p=0.3)
+        self.dropout = torch.nn.Dropout(p=self.dp_rate)
         self.out = torch.nn.Linear(out_channels[-1], num_targets)      
         self.reset_parameters()
         
