@@ -353,7 +353,7 @@ class XASNet_GraphNet(torch.nn.Module):
         out = self.output_dense(x)
         return out
     
-class SchNet(torch.nn.Module):
+class XASNet_SchNet(torch.nn.Module):
     r"""The continuous-filter convolutional neural network SchNet from the
     `"SchNet: A Continuous-filter Convolutional Neural Network for Modeling
     Quantum Interactions" <https://arxiv.org/abs/1706.08566>`_ paper that uses
