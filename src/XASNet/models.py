@@ -20,7 +20,7 @@ from torch_geometric.typing import OptTensor
 # --- Local modules
 from .XASNet_GAT import *
 from .XASNet_GraphNet.modules import GraphNetwork
-from .XAS_SchNet import *
+from .XASNet_SchNet import *
 from .utils.weight_init import kaiming_orthogonal_init
 
 gnn_layers = {
