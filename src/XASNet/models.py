@@ -155,8 +155,6 @@ class XASNet_GNN(torch.nn.Module):
         out = self.out(x)
         return out
 
-
-
 class XASNet_GAT(torch.nn.Module):
     """
     More detailed and custom implementation of GAT with different types of GAT layers.
@@ -466,9 +464,9 @@ class SchNet(torch.nn.Module):
                                      num_filters, cutoff)
             self.interactions.append(block)
 
-        self.lin1 = Linear(hidden_channels, hidden_channels // 2)
+        self.lin1 = Linear(hidden_channels, hidden_channels)
         self.act = ShiftedSoftplus()
-        self.lin2 = Linear(hidden_channels // 2, 1)
+        self.lin2 = Linear(hidden_channels, 200)
 
         self.register_buffer('initial_atomref', atomref)
         self.atomref = None
