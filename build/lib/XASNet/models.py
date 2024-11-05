@@ -58,6 +58,7 @@ class XASNet_GNN(torch.nn.Module):
         out_channels: List of output channels (same size of layers).
         num_targets: Number of target data points in energy axis 
                 of XAS spectrum. Defaults to 100.
+        dropout: The dropout ratio for the GNN layers
         heads: Number of heads in gat and gatv2.
         gat_dp: The rate of dropout in case of gat and gatv2.
     """
@@ -169,6 +170,7 @@ class XASNet_GAT(torch.nn.Module):
         n_heads: Number of heads.
         targets: Number of target data points in energy axis 
                 of XAS spectrum. Defaults to 100.
+        dropout: The dropout ration for GNN layers
         gat_type: Type of the gat layer.
         use_residuals: If true, residual layers is used.
         use_jk: If true, jumping knowledge mechanism is applied.
@@ -289,6 +291,7 @@ class XASNet_GraphNet(torch.nn.Module):
                 the global state of each input graph.
             gat_out (int): Output channels for GAT layer used to obtain 
                 the global state of each input graph.
+            dropout: The dropout ratio for GNN layers
             n_layers (int, optional): Number of layers in GraphNet. Defaults to 3.
             n_targets (int, optional): Number of target data points in energy axis 
                 of XAS spectrum. Defaults to 100.
