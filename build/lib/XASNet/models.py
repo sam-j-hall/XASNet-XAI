@@ -181,6 +181,7 @@ class XASNet_GAT(torch.nn.Module):
         out_channels: List[int],
         n_heads: int,
         targets: int,
+        dropout: float,
         gat_type: str = 'gat_custom',
         use_residuals: bool = False,
         use_jk: bool = False
@@ -193,6 +194,7 @@ class XASNet_GAT(torch.nn.Module):
         self.n_heads = n_heads
         self.n_layers = n_layers
         self.targets = targets
+        self.dp_rate = dropout
         self.gat_type = gat_type
         self.use_residuals = use_residuals
         self.use_jk = use_jk
@@ -230,7 +232,7 @@ class XASNet_GAT(torch.nn.Module):
         num_layers=3, bidirectional=True, batch_first=True)
         self.attn = Linear(2*out_channels[-2], 1)
 
-        self.dropout = torch.nn.Dropout(p=0.3)
+        self.dropout = torch.nn.Dropout(p=self.dp_rate)
         self.linear_out = LinearLayer(out_channels[-1], targets)
 
     def forward(self, 
@@ -274,6 +276,7 @@ class XASNet_GraphNet(torch.nn.Module):
                  out_channels: int,
                  gat_hidd: int,
                  gat_out: int,
+                 dropout: float,
                  n_layers: int = 3,
                  n_targets: int = 100):
         """
@@ -291,6 +294,7 @@ class XASNet_GraphNet(torch.nn.Module):
                 of XAS spectrum. Defaults to 100.
         """
         super().__init__()
+        self.dp_rate = dropout
         assert n_layers > 0
 
         #preparing the parameters for global, node and edge models 
@@ -336,7 +340,7 @@ class XASNet_GraphNet(torch.nn.Module):
 
         self.graphnets = ModuleList(graphnets)
 
-        self.dropout = Dropout(p=0.3)
+        self.dropout = Dropout(p=self.dp_rate)
         self.output_dense = Linear(out_channels, n_targets)
         self.reset_parameters()
 
