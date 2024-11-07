@@ -91,7 +91,6 @@ class GNNTrainer():
                 train_loss += loss
                 num_molecules_train += batch.num_graphs
                 optimizer.step()
-            scheduler.step()
             
             avg_train_loss = train_loss / num_molecules_train
 
@@ -114,6 +113,11 @@ class GNNTrainer():
                     num_molecules_val += batch.num_graphs
             avg_val_loss = val_loss / num_molecules_val
 
+            if type(scheduler) == torch.optim.lr_scheduler.ReduceLROnPlateau:
+                scheduler.step(avg_val_loss)
+            else:
+                scheduler.step()
+
             if avg_val_loss < prev_loss:
                 self._save_model()
                 prev_loss = avg_val_loss
@@ -122,7 +126,7 @@ class GNNTrainer():
                 end.record()
                 torch.cuda.synchronize()
                 time=f"{start.elapsed_time(end)/6e4:.2f} mins"
-                lr=round(float(scheduler.get_lr()[0]), 5)
+                lr=round(float(scheduler.get_last_lr()[0]), 5)
                 self.metrics.store_metrics(
                     mode='train',
                     epoch=epoch,
