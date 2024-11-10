@@ -202,8 +202,8 @@ class GNNTrainer():
             json.dump(params, fout)
        
     def _save_model(self):
-        if not osp.exists('./best_model'):
-            os.mkdir('./best_model')
-        path = osp.join('./best_model', self.model_name + '.pt')
+        if not osp.exists('./models'):
+            os.mkdir('./models')
+        path = osp.join('./models', self.model_name + '.pt')
         torch.save(self.model.cpu().state_dict(), path)
         self.model.to(self.device)
